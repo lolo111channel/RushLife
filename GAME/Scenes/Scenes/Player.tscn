@@ -1,0 +1,268 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Graphics/Human.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/Lato-Regular.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Graphics/beard.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/background.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/moon.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/Sun.png" type="Texture" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "jump",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "stay",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 5 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 5 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=11]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="StreamTexture" id=17]
+load_path = "res://.import/Human.png.png-d625a99fb24b1571f95f6a3c09f7dafb.stex"
+
+[sub_resource type="RectangleShape2D" id=12]
+extents = Vector2( 17.3063, 31.98 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 22
+use_filter = true
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 21
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=15]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 90.0 ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "background"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -360.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Node2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -360.0, 360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("CanvasModulate:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.4, 0.6, 0.7, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.137255, 0.137255, 0.137255, 1 ), Color( 0.137255, 0.137255, 0.137255, 1 ), Color( 1, 1, 1, 1 ), Color( 0.137255, 0.137255, 0.137255, 1 ), Color( 0.137255, 0.137255, 0.137255, 1 ) ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
+script = ExtResource( 2 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+
+[node name="background" type="Sprite" parent="."]
+scale = Vector2( 5, 5 )
+z_index = -1
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 4, 4 )
+z_index = 1
+frames = SubResource( 5 )
+animation = "stay"
+playing = true
+
+[node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
+position = Vector2( 4.018, -4 )
+scale = Vector2( 4, 4 )
+z_index = 1
+frames = SubResource( 11 )
+frame = 4
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 4, 4 )
+texture = SubResource( 17 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="death" type="Control" parent="CanvasLayer"]
+visible = false
+margin_right = 480.0
+margin_bottom = 270.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="center" type="CenterContainer" parent="CanvasLayer/death"]
+margin_right = 480.0
+margin_bottom = 270.0
+
+[node name="Grid" type="GridContainer" parent="CanvasLayer/death/center"]
+margin_left = 139.0
+margin_top = 103.0
+margin_right = 340.0
+margin_bottom = 166.0
+
+[node name="Label" type="Label" parent="CanvasLayer/death/center/Grid"]
+margin_right = 201.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 13 )
+text = "GAME OVER"
+align = 1
+
+[node name="Grid2" type="GridContainer" parent="CanvasLayer/death/center/Grid"]
+margin_top = 31.0
+margin_right = 201.0
+margin_bottom = 63.0
+custom_constants/hseparation = 50
+columns = 2
+
+[node name="Menu" type="Button" parent="CanvasLayer/death/center/Grid/Grid2"]
+margin_right = 74.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 14 )
+text = "MENU"
+
+[node name="Retry" type="Button" parent="CanvasLayer/death/center/Grid/Grid2"]
+margin_left = 124.0
+margin_right = 201.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 14 )
+text = "RETRY"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/death = SubResource( 15 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+playback_speed = 0.05
+anims/background = SubResource( 16 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Node" type="Node2D" parent="."]
+position = Vector2( 1.33484, 133.778 )
+rotation = -5.02655
+z_index = -1
+
+[node name="Sun" type="Sprite" parent="Node"]
+position = Vector2( -261.805, -9.79185 )
+scale = Vector2( 0.991602, 1 )
+texture = ExtResource( 8 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 1.40684, 170.182 )
+rotation = -5.02655
+scale = Vector2( 3, 3 )
+z_index = -1
+
+[node name="moon" type="Sprite" parent="Node2D"]
+position = Vector2( 93.0259, -3.87879 )
+rotation = 6.28319
+texture = ExtResource( 7 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/death/center/Grid/Grid2/Menu" to="." method="_on_Menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/death/center/Grid/Grid2/Retry" to="." method="_on_Retry_pressed"]
